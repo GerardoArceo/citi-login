@@ -1,0 +1,37 @@
+<div class="lmn-row lmn-p-0">
+  <div class="lmn-form-group lmn-col-md-6 lmn-pl-0" [ngClass]="{'lmn-form-required':required}">
+    <label class="lmn-form-label" [for]="controlName">{{label}}
+    </label>
+
+      <div class="lmn-input-group">
+        <input class="lmn-input no-spinners" [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched)}"
+        [readonly]="readonly" [formControl]="control" [name]="controlName"
+        [type]="'number'" [placeholder]="placeHolder" [required]="required"
+        [min]="min" [max]="max" [disabled]="disabled"
+        (focusout)="controlFocusOut()"/>
+        <div class="lmn-input-group-append" *ngIf="iconInFirstInput">
+          <button (click)="openModal()" class='lmn-btn lmn-btn-primary lmn-modal-event'
+            [disabled]="disabled">
+            <i class="lmnicon lmnicon-search"></i>
+          </button>
+        </div>
+      </div>
+
+
+    <control-errors class="lmn-row" [control]="control"></control-errors>
+  </div>
+  <div class="lmn-form-group lmn-col-md-6 lmn-pr-0" [ngClass]="{'lmn-form-required':required}">
+    <label class="lmn-form-label">{{secondLabel}}</label>
+    <div class="lmn-input-group">
+      <div class="lmn-input-group-append" *ngIf="!iconInFirstInput">
+        <button (click)="openModal()" class='lmn-btn lmn-btn-primary lmn-modal-event'
+          [disabled]="disabled">
+          <i class="lmnicon lmnicon-search"></i>
+        </button>
+      </div>
+      <input class="lmn-input" [readonly]="true" [name]="secondControlName"
+        [type]="'text'" [placeholder]="secondPlaceHolder" [formControl]="secondControl" [value]="'secondValue'"/>
+    </div>
+    <control-errors class="lmn-row" [control]="control"></control-errors>
+  </div>
+</div>

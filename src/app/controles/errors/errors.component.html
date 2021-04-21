@@ -1,0 +1,17 @@
+<div *ngIf="control.invalid && (control.dirty || control.touched)" class="lmn-alert lmn-alert-danger lmn-alert-banner lmn-row lmn-ml-0">
+  <span *ngIf="control.errors?.required || control.errors?.blankSpace ">Este campo es requerido</span>
+  <span *ngIf="control.errors?.minlength">El texto debe ser mayor a {{control.errors?.minlength.requiredLength}} caracteres</span>
+  <span *ngIf="control.errors?.maxlength">El texto debe ser menor a {{control.errors?.maxlength.requiredLength}} caracteres</span>
+  <span *ngIf="control.errors?.max">Ingrese un valor menor ó igual a {{control.errors?.max.max}}</span>
+  <span *ngIf="control.errors?.min">Ingrese un valor mayor ó igual a {{control.errors?.min.min}}</span>
+  <span *ngIf="control.errors?.rfc">RFC no válido</span>
+  <span *ngIf="control.errors?.customMin">{{control.errors?.customMin}}</span>
+  <span *ngIf="control.errors?.email">Formato de Email no válido</span>
+  <span *ngIf="control.errors?.alfanumericoCaracteresEspeciales">Solo se Aceptan Letras, Números y Caracteres (,./@)</span>
+  <span *ngIf="control.errors?.numerico">Este campo permite solo números</span>
+  <span *ngIf="control.errors?.alfanumerico">Este campo permite solo números y letras</span>
+  <span *ngIf="control.errors?.maxLengthNumber">Máximo {{control.errors?.maxLengthNumber.maxValue}} {{control.errors?.maxLengthNumber.maxValue==1?'Dígito':'Dígitos'}}</span>
+  <span *ngIf="control.errors?.soloLetras">Este campo permite solo letras</span>
+  <span *ngIf="control.errors?.alfanumericoPunto">Solo se Aceptan Letras, Números y Punto (.)</span>
+  <span *ngIf="control.errors?.selectorNotNullOrEmpty">{{control.errors?.selectorNotNullOrEmpty}}</span>
+</div>

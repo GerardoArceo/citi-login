@@ -1,0 +1,23 @@
+<h1 mat-dialog-title class="lmn-text-center">IDENTIFICARSE</h1>
+<div mat-dialog-content lmn-text-center>
+  <div class="lmn-row">
+    Número de Nómina
+    <control-input [control]="form.controls.nomina"
+    [controlName]="'fdf'" [placeHolder]="''">
+    </control-input>
+  </div>
+  <div class="lmn-row" *ngIf="showButton">
+    <a routerLink="/register" [skipLocationChange]="true" [queryParams]="data" [mat-dialog-close]="false">Registrarse</a>
+  </div>
+</div>
+
+
+<div mat-dialog-actions lmn-text-center>
+  <button mat-raised-button color="warn" *ngIf="showButton"
+    [mat-dialog-close]="false">
+      Salir
+    </button>
+    <button mat-raised-button color="primary" (click)="checkNomina()">
+      Comprobar
+    </button>
+</div>

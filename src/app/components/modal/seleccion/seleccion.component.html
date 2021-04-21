@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+
+  <mat-spinner class="table-spinner" *ngIf="showLoading"></mat-spinner>
+
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput [(ngModel)]="searchValue" [name]="'search'" #input>
+  </mat-form-field>
+
+  <control-grid [pageSize]="5" [selectable]="true" (selected)="tableSelection($event)" [search]="searchValue" [dataSource]="dataSource" [tableColumns]="displayedColumns"></control-grid>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="data.btnCloseText && data.btnCloseText.length>0" mat-raised-button color="warn" [mat-dialog-close]="false">{{data.btnCloseText}}</button>
+</div>

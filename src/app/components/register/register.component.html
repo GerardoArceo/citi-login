@@ -1,0 +1,150 @@
+<br><br><br><br><br><br>
+
+<div class="center-form lmn-text-color-0">
+  <div class="lmn-shadow-lg lmn-p-3 lmn-mb-5 color-form">
+    <div class="form-body">
+      <form [formGroup]="form" novalidate>
+
+        <div class="form-head-table">
+          <div class="lmn-row">
+            <div class="lmn-col-sm text-center">
+              <p>Datos Personales</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lmn-row">
+          <div class="lmn-col-md-6">
+            <control-numeric [control]="form.controls['nomina']" [controlName]="'nomina'"
+              [label]="'Número de Nómina *'" [placeHolder]="''">
+            </control-numeric>
+          </div>
+          <div class="lmn-col-md-6">
+            <control-numeric [control]="form.controls['sirh']" [controlName]="'sirh'"
+              [label]="'SIRH *'" [placeHolder]="''">
+            </control-numeric>
+          </div>
+        </div>
+        <div class="lmn-row">
+          <div class="lmn-col-md-6">
+            <control-input [control]="form.controls['nombre']" [controlName]="'nombre'"
+              [label]="'Nombre de Empleado *'" [placeHolder]="''">
+            </control-input>
+          </div>
+          <div class="lmn-col-md-6">
+            <control-input [control]="form.controls['telefono']" [controlName]="'telefono'"
+              [label]="'Teléfono *'" [placeHolder]="''">
+            </control-input>
+          </div>
+        </div>
+        <div class="lmn-row">
+          <div class="lmn-col-md-6">
+            <control-numeric [control]="form.controls['nivel']" [controlName]="'nivel'"
+              [label]="'Nivel *'" [placeHolder]="''">
+            </control-numeric>
+          </div>
+          <div class="lmn-col-md-6">
+            <control-input [control]="form.controls['soeid']" [controlName]="'soeid'"
+              [label]="'SOEID'" [placeHolder]="''" [readonly]="true">
+            </control-input>
+          </div>
+        </div>
+
+        <div class="form-head-table">
+          <div class="lmn-row">
+            <div class="lmn-col-sm text-center">
+              <p>Datos Principales</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lmn-row">
+          <div class="lmn-col-md-12">
+            <control-customselect [control]="form.controls['clave_area']" [controlName]="'clave_area'"
+              [label]="'Clave de área'" [placeHolder]="''" 
+              
+              [secondControl]="form.controls['area']" [secondControlName]="'area'" 
+              [secondLabel]="'Área'" [secondPlaceHolder]="''" [secondValue]="''"
+
+              [iconInFirstInput]="true"
+
+              [title]="'Catálogo de áreas'" [tblField1]="'NCLAVE_AREA'" [firstFieldTitle]="'Clave área'" [tblField2]="'CNOMBRE'" [secondFieldTitle]="'Nombre'"
+              [data]="catalogoAreas" [keySearch]="'NCLAVE_AREA'"
+              (onSelection)="areaOnSelect($event)" (onControlFocusOut)="areaOnSelect($event)">
+            </control-customselect>
+          </div>
+        </div>
+        <div class="lmn-row">
+          <div class="lmn-col-md-12">
+            <control-customselect [control]="form.controls['clave_departamento']" [controlName]="'clave_departamento'"
+              [label]="'Clave de departamento'" [placeHolder]="''" 
+              
+              [secondControl]="form.controls['departamento']" [secondControlName]="'departamento'" 
+              [secondLabel]="'Departamento'" [secondPlaceHolder]="''" [secondValue]="''"
+
+              [iconInFirstInput]="true"
+
+              [title]="'Catálogo de departamentos'" [tblField1]="'NCLAVE_DEPARTAMENTO'" [firstFieldTitle]="'Clave departamento'" [tblField2]="'CNOMBRE'" [secondFieldTitle]="'Nombre'"
+              [data]="catalogoDepartamentos" [keySearch]="'NCLAVE_DEPARTAMENTO'"
+              (onSelection)="departamentoOnSelect($event)" (onControlFocusOut)="departamentoOnSelect($event)">
+            </control-customselect>
+          </div>
+        </div>
+        <div class="lmn-row">
+          <div class="lmn-col-md-12">
+            <control-customselect [control]="form.controls['clave_subdepartamento']" [controlName]="'clave_subdepartamento'"
+              [label]="'Clave de subdepartamento'" [placeHolder]="''" 
+              
+              [secondControl]="form.controls['subdepartamento']" [secondControlName]="'subdepartamento'" 
+              [secondLabel]="'Subdepartamento'" [secondPlaceHolder]="''" [secondValue]="''"
+
+              [iconInFirstInput]="true"
+
+              [title]="'Catálogo de subdepartamentos'" [tblField1]="'NCLAVE_SUBDEPARTAMENTO'" [firstFieldTitle]="'Clave subdepartamento'" [tblField2]="'CNOMBRE'" [secondFieldTitle]="'Nombre'"
+              [data]="catalogoSubdepartamentos" [keySearch]="'NCLAVE_SUBDEPARTAMENTO'"
+              (onSelection)="subdepartamentoOnSelect($event)" (onControlFocusOut)="subdepartamentoOnSelect($event)">
+            </control-customselect>
+          </div>
+        </div>
+
+        <div class="form-head-table">
+          <div class="lmn-row">
+            <div class="lmn-col-sm text-center">
+              <p>Datos Adicionales</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lmn-row">
+          <div class="lmn-col-md-6">
+            <control-input [control]="form.controls['sucursal']" [controlName]="'sucursal'"
+              [label]="'Sucursal u Oficina'" [placeHolder]="''">
+            </control-input>
+          </div>
+          <div class="lmn-col-md-6">
+            <control-input [control]="form.controls['estacion']" [controlName]="'estacion'"
+              [label]="'Estación'" [placeHolder]="''">
+            </control-input>
+          </div>
+        </div>
+        <div class="lmn-row">
+          <div class="lmn-col-md-6">
+            <control-input [control]="form.controls['ip']" [controlName]="'ip'"
+              [label]="'Dirección IP'" [placeHolder]="''">
+            </control-input>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="form-footer text-center">
+      <a class="lmn-btn lmn-btn-danger lmn-ui-lg" routerLink="/home">
+        <i class="lmnicon lmnicon-close"></i> Salir
+      </a>
+      <button class="lmn-btn lmn-btn-success lmn-ui-lg" (click)='registrar()'>
+        <i class=" lmnicon lmnicon-save"></i> Guardar
+      </button>
+    </div>
+  </div>
+</div>

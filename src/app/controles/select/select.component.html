@@ -1,0 +1,31 @@
+<div class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <label class="lmn-form-label" [for]="controlName" *ngIf="label">{{label}}
+  </label>
+  <select class="lmn-form-select"
+    [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched)}"
+    [attr.disabled]="disabled? '' : null"
+    [formControl]="control" [name]="controlName" [required]="required" (ngModelChange)="functionValueChange($event)">
+    <ng-container *ngIf="dataSource.length>0">
+      <option *ngIf="allowNulls==false" disabled class="lmn-form-option" value="-1">--- SELECCIONE ---</option>
+      <option *ngIf="allowNulls==true" class="lmn-form-option" value="-1">--- SELECCIONE ---</option>
+      <ng-container *ngFor="let data of dataSource">
+        <option class="lmn-form-option" *ngIf="valuePrimitive==true && showId==false" [ngValue]="data[valueField]">
+          {{data[textField]}}
+        </option>
+        <option class="lmn-form-option" *ngIf="valuePrimitive==true && showId==true" [ngValue]="data[valueField]">
+          {{data[valueField] + ' - ' + data[textField]}}
+        </option>
+        <option class="lmn-form-option" *ngIf="valuePrimitive==false && showId==false" [ngValue]="data">
+          {{data[textField]}}
+        </option>
+        <option class="lmn-form-option" *ngIf="valuePrimitive==false && showId==true" [ngValue]="data">
+          {{data[valueField] + ' - ' + data[textField]}}
+        </option>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="dataSource.length==0">
+      <option disabled class="lmn-form-option" value="-1" class="emptyList">Sin datos</option>
+    </ng-container>
+  </select>
+  <control-errors class="lmn-row" [control]="control"></control-errors>
+</div>

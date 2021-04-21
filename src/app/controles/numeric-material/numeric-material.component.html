@@ -1,0 +1,14 @@
+<mat-form-field appearance="outline" class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <mat-label class="lmn-form-label" *ngIf="label">{{label}}</mat-label>
+  <input matInput *ngIf="currency==false" class="lmn-input"
+    [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched),'no-spinners':spinners==false}"
+    [readonly]="readonly" [formControl]="control" [name]="controlName" [type]="'number'" [placeholder]="placeHolder"
+    [required]="required" (focusout)="functionValueChange($event)" [min]="min" [max]="max" [disabled]="disabled"
+    (keypress)="keypressed($event)" />
+    <input matInput *ngIf="currency==true" appCurrencyMask class="lmn-input" [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched),'no-spinners':spinners==false}"
+    [readonly]="readonly" [formControl]="control" [name]="controlName"
+    [type]="'number'" [placeholder]="placeHolder" [required]="required"
+    (ngModelChange)="functionValueChange($event)"
+    [min]="min" [max]="max" [disabled]="disabled" (keypress)="keypressed($event)"/>
+  <control-errors class="lmn-row" [control]="control"></control-errors>
+</mat-form-field>

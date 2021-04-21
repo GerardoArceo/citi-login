@@ -1,0 +1,11 @@
+<div class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <label class="lmn-form-label" [for]="controlName" *ngIf="label">{{label}}
+  </label>
+  <textarea class="lmn-input lmn-w-100" [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched)}"
+    [rows]="10" [cols]="100"
+    [readonly]="readonly" [formControl]="control" [name]="controlName"
+    [placeholder]="placeHolder" [required]="required"
+    [minlength]="minLength" [maxlength]="maxLength" [disabled]="disabled">
+  </textarea>
+  <control-errors class="lmn-row" [control]="control"></control-errors>
+</div>

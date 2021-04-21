@@ -1,0 +1,32 @@
+<div class="center-form lmn-text-color-0">
+    <form novalidate [formGroup]="FormLogin">
+        <div class="lmn-shadow-lg lmn-p-3 lmn-mb-5 color-form form-40">
+            <div class="form-head-table">
+                <div class="lmn-row">
+                    <div class="lmn-col-sm text-center">
+                        <p>Iniciar Sesión</p>
+                    </div>
+                </div>
+            </div>
+            <!-- body  -->
+            <div class="lmn-row">
+                <div class="lmn-form-group lmn-col-md-12 lmn-form-required">
+                    <label class="lmn-form-label" for="user">Usuario:</label>
+                    <input type="text" id="user" formControlName="user" class="lmn-input" placeholder="Usuario" required autofocus />
+                </div>
+            </div>
+
+            <div class="lmn-row">
+                <div class="lmn-form-group lmn-col-md-12 lmn-form-required">
+                    <label class="lmn-form-label" for="pass">Contraseña:</label>
+                    <input type="password" id="pass" formControlName="pass" class="lmn-input" placeholder="Contraseña" required />
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button class="lmn-btn lmn-btn-success lmn-ui-lg" (click)="validaUser()">Entrar <i class="lmnicon lmnicon-right"></i></button>
+            </div>
+
+        </div>
+    </form>
+</div>

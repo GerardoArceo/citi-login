@@ -1,0 +1,10 @@
+<div class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <label class="lmn-form-label" [for]="controlName">{{label}}
+  </label>
+  <input class="lmn-input" [ngClass]="{'input-validation':control.invalid==true&& (control.dirty || control.touched)}"
+    [readonly]="readonly" [formControl]="control" [name]="controlName"
+    [type]="'time'" [placeholder]="placeHolder" [required]="required"
+    [step]="showSeconds==true?1:null"
+  />
+  <control-errors class="lmn-row" [control]="control"></control-errors>
+</div>

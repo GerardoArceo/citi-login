@@ -1,0 +1,153 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  annotations:
+    version: 0.0.1
+    description: A bare-bones deployment template for a web application.
+  name: nodejs-web-service
+labels:
+  template: web-basic
+  template.version: 0.0.1
+message: A new java application has been created in your project. 
+parameters:
+  - description: The name for the application.
+    displayName: Application Name
+    name: APP_NAME
+    required: true
+  - description: The image name for the application.
+    displayName: Image Name
+    name: IMAGE_NAME
+    required: true
+  - description: The version of the application to deploy.
+    displayName: Application Version
+    name: APP_VERSION
+    required: true
+  - name: ENV_CATEGORY_LOWERCASE
+    required: true
+  - description: The docker registry hostname for the environment
+    displayName: Docker Registry
+    name: DOCKER_REGISTRY
+    required: true
+    value: docker-icg-prod-local.artifactrepository.citigroup.net
+  - description: The docker namespace
+    displayName: Docker Namespace
+    name: DOCKER_NAMESPACE
+    required: true
+  - description: The target environment
+    displayName: Environment
+    name: ENV
+    value: DEV
+    required: true
+  - name: ENV_NAME
+    required: true
+  - description: Health check endpoint. Defaults to '/'
+    displayName: Custom Health Check Endpoint
+    name: HEALTH_CHECK_ENDPOINT
+    value: /
+    required: false
+  - description:
+      "Custom hostname for http service route.  Leave blank for default hostname,
+      e.g.: <application-name>-<project>.<default-domain-suffix>"
+    displayName: Custom http Route Hostname
+    name: HOSTNAME_HTTP
+    value: ""
+    required: false  
+  - description: The number of pods to run
+    displayName: Replicas
+    name: REPLICAS
+    required: true
+  - description: The memory limit for the application container
+    displayName: Memory Limit
+    name: MEMORY_LIMIT
+    required: true
+    value: 1Gi
+objects:
+    - kind: Service
+      apiVersion: v1
+      spec:
+        ports:
+          - port: 4330
+            targetPort: 4330
+        selector:
+          deploymentConfig: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+      metadata:
+        name: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+        labels:
+          app: "${APP_NAME}"
+        annotations:
+          description: The application's http port.
+    - kind: Route
+      apiVersion: v1
+      id: "${APP_NAME}-http"
+      metadata:
+        name: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+        labels:
+          app: "${APP_NAME}"
+        annotations:
+          description: Route for application's http service.
+      spec:
+        host: "${HOSTNAME_HTTP}"
+        to:
+          name: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+    - kind: DeploymentConfig
+      apiVersion: v1
+      metadata:
+        name: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+        labels:
+          app: "${APP_NAME}"
+      spec:
+        strategy:
+          rollingParams:
+            updatePeriodSeconds: 1
+            intervalSeconds: 1
+            timeoutSeconds: 900
+            maxSurge: "25%"
+            maxUnavailable: "25%"
+          type: Rolling
+        triggers: []
+        replicas: ${{REPLICAS}}
+        selector:
+          deploymentConfig: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+        template:
+          metadata:
+            name: "${APP_NAME}"
+            labels:
+              deploymentConfig: "${APP_NAME}-${ENV_CATEGORY_LOWERCASE}"
+              app: "${APP_NAME}"
+          spec:
+            terminationGracePeriodSeconds: 50
+            containers:
+              - name: "${APP_NAME}"
+                image: "${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/${IMAGE_NAME}:${APP_VERSION}"
+                imagePullPolicy: Always
+                env:
+                  - name: ENVIRONMENT
+                    value: "${ENV_CATEGORY_LOWERCASE}"
+                  - name: ENV
+                    value: "${ENV_NAME}"                  
+                livenessProbe:
+                  failureThreshold: 10
+                  exec:
+                    command:
+                      - cat
+                      - /opt/README.MD
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                readinessProbe:
+                  failureThreshold: 10
+                  exec:
+                    command:
+                      - cat
+                      - /opt/README.MD
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                resources:
+                  limits:
+                    memory: ${MEMORY_LIMIT}
+                ports:
+                  - name: http
+                    containerPort: 4330
+                    protocol: TCP

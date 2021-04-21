@@ -1,0 +1,15 @@
+<div class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <label class="lmn-form-label" [for]="controlName">{{label}}
+  </label>
+  <input *ngIf="currency==false" class="lmn-input" [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched),'no-spinners':spinners==false}"
+    [readonly]="readonly" [formControl]="control" [name]="controlName"
+    [type]="'number'" [placeholder]="placeHolder" [required]="required"
+    (focusout)="functionValueChange($event)"
+    [min]="min" [max]="max" [disabled]="disabled" (keypress)="keypressed($event)"/>
+  <input *ngIf="currency==true" appCurrencyMask class="lmn-input" [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched),'no-spinners':spinners==false}"
+    [readonly]="readonly" [formControl]="control" [name]="controlName"
+    [type]="'text'" [placeholder]="placeHolder" [required]="required"
+    (ngModelChange)="functionValueChange($event)"
+    [min]="min" [max]="max" [disabled]="disabled" (keypress)="keypressed($event)"/>
+  <control-errors class="lmn-row" [control]="control"></control-errors>
+</div>

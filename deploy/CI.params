@@ -1,0 +1,3 @@
+APP_NAME=arrenda-web
+REPLICAS="1"
+ENVIRONMENT=dev

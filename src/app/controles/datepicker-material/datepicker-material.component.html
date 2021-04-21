@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline" class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <mat-label class="lmn-form-label" *ngIf="label">{{label}}</mat-label>
+  <mat-datepicker-toggle matSuffix [for]="mpicker"></mat-datepicker-toggle>
+  <mat-datepicker #mpicker></mat-datepicker>
+  <input matInput [matDatepicker]="mpicker" class="lmn-input" [ngClass]="{'input-validation':control.invalid==true&& (control.dirty || control.touched)}"
+    [readonly]="readonly" [formControl]="control" [name]="controlName" [placeholder]="placeHolder"
+    [required]="required" [min]="minDate" [max]="maxDate" (ngModelChange)="functionValueChange($event)" />
+  <control-errors class="lmn-row" [control]="control"></control-errors>
+</mat-form-field>

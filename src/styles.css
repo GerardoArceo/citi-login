@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* @import "@citi-icg-158830/elemental-chameleon/dist/chameleon-light.min.css"; */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "assets/css/cssLayout.css";
+@import "assets/css/chameleon-light.css";
+/* html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+    } */
+
+.no-spinners::-webkit-inner-spin-button,
+.no-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.separadorSeccion {
+  margin-right: 10px;
+}
+
+.barraepicas {
+  height: 70px;
+}
+
+.dropdown-content > a {
+  font-size: 16px;
+}

@@ -1,0 +1,41 @@
+<mat-form-field appearance="outline" class="lmn-form-group" [ngClass]="{'lmn-form-required':required}">
+  <mat-label class="lmn-form-label" *ngIf="label">{{label}}</mat-label>
+  <!-- <mat-select class="lmn-form-select"
+    [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched)}"
+    [attr.disabled]="disabled? '' : null" [formControl]="control" [required]="required"
+    (ngModelChange)="functionValueChange($event)">
+    <ng-container *ngIf="dataSource.length>0">
+      <mat-option disabled class="lmn-form-option" value="-1">--- SELECCIONE ---</mat-option>
+      <ng-container *ngFor="let data of dataSource">
+        <mat-option class="lmn-form-option" *ngIf="valuePrimitive==true" [value]="data[valueField]">
+          {{data[textField]}}
+        </mat-option>
+        <mat-option class="lmn-form-option" *ngIf="valuePrimitive==false" [value]="data">
+          {{data[textField]}}
+        </mat-option>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="dataSource.length==0">
+      <mat-option disabled class="lmn-form-option" value="-1" class="emptyList">Sin datos</mat-option>
+    </ng-container>
+  </mat-select> -->
+  <select matNativeControl class="lmn-form-select"
+    [ngClass]="{'input-validation':control.invalid==true && (control.dirty || control.touched)}"
+    [attr.disabled]="disabled? '' : null"
+    [formControl]="control" [name]="controlName" [required]="required" (ngModelChange)="functionValueChange($event)">
+    <ng-container *ngIf="dataSource.length>0">
+      <option disabled class="lmn-form-option" value="-1">--- SELECCIONE ---</option>
+      <ng-container *ngFor="let data of dataSource">
+        <option class="lmn-form-option" *ngIf="valuePrimitive==true" [ngValue]="data[valueField]">
+          {{data[textField]}}
+        </option>
+        <option class="lmn-form-option" *ngIf="valuePrimitive==false" [ngValue]="data">
+          {{data[textField]}}
+        </option>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="dataSource.length==0">
+      <option disabled class="lmn-form-option" value="-1" class="emptyList">Sin datos</option>
+    </ng-container>
+  </select>
+</mat-form-field>
