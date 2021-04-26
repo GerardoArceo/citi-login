@@ -1,17 +1,16 @@
 <br><br><br><br><br><br><br><br>
 <div class="lmn-row lmn-text-color-0">
-  <div class="lmn-col-md-4">
-    <img class="image" src="../../../assets/images/pcce/five.png" (click)="open('five')">
+  <div class="lmn-col-md-3"></div>
+  <div class="lmn-col-md-2" *ngFor="let item of imgSrc">
+    <img class="image" [src]="item.set"
+    (mouseout)="item.set = item.azul"
+    (mouseover)="item.set = item.blanco"
+    (click)="open(item.link)">
   </div>
-  <div class="lmn-col-md-4">
-    <img class="image" src="../../../assets/images/pcce/arrenda.png" (click)="open('arrenda')">
-  </div>
-  <div class="lmn-col-md-4">
-    <img class="image" src="../../../assets/images/pcce/opera.png" (click)="open('opera')">
-  </div>
+  <div class="lmn-col-md-3"></div>
 </div>
 
-<br><br>
+<br><br><br><br>
 
 <div class="mln-row">
   <span class="lmn-mr-5"><a routerLink="#">Accesibility</a></span>

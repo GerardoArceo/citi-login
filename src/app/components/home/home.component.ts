@@ -15,6 +15,26 @@ export class HomeComponent {
 
   userValidate = false;
   SOEID = '';
+  imgSrc = [
+    {
+      set: '../../../assets/images/azul/five.png',
+      azul: '../../../assets/images/azul/five.png',
+      blanco: '../../../assets/images/blanco/five.png',
+      link: 'five'
+    },
+    {
+      set: '../../../assets/images/azul/arrenda.png',
+      azul: '../../../assets/images/azul/arrenda.png',
+      blanco: '../../../assets/images/blanco/arrenda.png',
+      link: 'arrenda'
+    },
+    {
+      set: '../../../assets/images/azul/opera.png',
+      azul: '../../../assets/images/azul/opera.png',
+      blanco: '../../../assets/images/blanco/opera.png',
+      link: 'opera'
+    },
+  ]
 
   constructor(private router: Router, 
     private sesion: ValidaSesionService,
@@ -29,7 +49,7 @@ export class HomeComponent {
           SOEID: this.SOEID,
           IS_NOMINA: false
         };
-        Loading.show();
+        //Loading.show();
         this.loginService.consultaByNominaOrSoeid(data).subscribe(arg => {
           Loading.hide();
           if (arg.status == 'success') {
