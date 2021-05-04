@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
     if (barras != null) {
       barras.style.visibility = "hidden";
     }
-    if (this.sesion.validaSesion()) {
-      this.router.navigate(['arrendadora']);
-    }
   }
 
   ngOnInit(): void {
@@ -41,13 +38,12 @@ export class LoginComponent implements OnInit {
     if (this.FormLogin.get('user').value == "maker" || this.FormLogin.get('user').value == "checker") {
       let formValue = this.FormLogin.value;
       localStorage.setItem('sesion', JSON.stringify(formValue));
-      this.router.navigate(['arrendadora']);
       let barras = document.getElementById('barraepicas');
       if (barras != null) {
         barras.style.visibility = "visible";
       }
       if(document.getElementById('lblUserRol')){
-        document.getElementById('lblUserRol').textContent = "Hola Shendira Reyes: " + this.FormLogin.get('user').value;
+        document.getElementById('lblUserRol').textContent = "Bienvenido";
       }
     } else {
       alert('Las credenciales no son validas.');

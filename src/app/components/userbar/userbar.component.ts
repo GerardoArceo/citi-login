@@ -16,13 +16,13 @@ export class UserbarComponent implements OnInit {
   ngOnInit(): void {
     let sesion = (localStorage.getItem('sesion')?JSON.parse(localStorage.getItem('sesion')):false);
     if (sesion) {
-      this.usuario = "Hola Shendira Reyes: "+sesion.user;
+      this.usuario = "Bienvenido";
     }
   }
 
   cerrarSesion(){
     localStorage.removeItem('sesion');
-    this.router.navigate(['arrendadora/login']);
+    this.router.navigate(['/']);
     document.getElementById('lblUserRol').textContent =  "Bienvenido";
   }
 

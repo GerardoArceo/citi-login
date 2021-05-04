@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "five-arrendadora": {
+    "login": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/five-arrendadora",
+            "outputPath": "dist/login",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -145,18 +145,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "five-arrendadora:build"
+            "browserTarget": "login:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "five-arrendadora:build:production"
+              "browserTarget": "login:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "five-arrendadora:build"
+            "browserTarget": "login:build"
           }
         },
         "test": {
@@ -193,18 +193,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "five-arrendadora:serve"
+            "devServerTarget": "login:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "five-arrendadora:serve:production"
+              "devServerTarget": "login:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "five-arrendadora",
+  "defaultProject": "login",
   "cli": {
     "analytics": "49dfd897-3e9b-4e14-9438-dceb4453d092"
   }

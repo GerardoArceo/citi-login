@@ -49,7 +49,7 @@ export class HomeComponent {
           SOEID: this.SOEID,
           IS_NOMINA: false
         };
-        //Loading.show();
+        Loading.show();
         this.loginService.consultaByNominaOrSoeid(data).subscribe(arg => {
           Loading.hide();
           if (arg.status == 'success') {
@@ -57,6 +57,9 @@ export class HomeComponent {
           } else {
             this.snackBarService.alertaError('El usuario no existe, se solicitará nómina');
           }
+        }, err => {
+          this.snackBarService.alertaError('Hubo un error con el servicio');
+          Loading.hide();
         });
     });
     // this.sesion.validaSesion();
