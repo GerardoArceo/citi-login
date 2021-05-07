@@ -46,7 +46,7 @@ export class LoginNominaComponent implements OnInit {
     };
 
     Loading.show();
-    this.loginService.consultaByNominaOrSoeid(data).subscribe(arg => {
+    this.loginService.consultaByNominaOrSoeid(data, this.data.origin).subscribe(arg => {
       Loading.hide();
       if (arg.status == 'success') {
         window.location.href = 'http://localhost:4200/' + this.data.option;

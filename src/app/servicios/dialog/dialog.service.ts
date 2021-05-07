@@ -44,7 +44,7 @@ export class DialogService {
     this.popUpRef = this.dialog.open(PopupComponent, {
       width: '30%',
       minWidth: '300px',
-      disableClose: true,
+      disableClose: false,
       data
     });
   }
@@ -63,7 +63,7 @@ export class DialogService {
     this.loginNominaRef = this.dialog.open(LoginNominaComponent, {
       width: '30%',
       minWidth: '300px',
-      disableClose: true,
+      disableClose: false,
       data
     });
   }

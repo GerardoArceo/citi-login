@@ -45,21 +45,21 @@ export class RegisterComponent implements OnInit{
 
   initForm() {
     this.form = this.formBuilder.group({
-      nomina: ['', [Validators.required, Validators.maxLength(12)]],
-      sirh: ['', [Validators.required, Validators.maxLength(12)]],
+      nomina: ['', [Validators.required, Validators.maxLength(10)]],
+      sirh: ['', [Validators.required, Validators.maxLength(10)]],
       nombre: ['', [Validators.required, Validators.maxLength(35)]],
-      telefono: ['', [Validators.required, Validators.maxLength(12)]],
-      nivel: ['', [Validators.required, Validators.maxLength(12)]],
+      telefono: ['', [Validators.required, Validators.maxLength(10)]],
+      nivel: ['', [Validators.required, Validators.maxLength(2)]],
       soeid: [this.dataParams.soeid, [Validators.required, Validators.maxLength(10)]],
 
-      clave_area: ['', [Validators.required, Validators.maxLength(12)]],
+      clave_area: ['', [Validators.required, Validators.maxLength(5)]],
       area: ['', []],
-      clave_departamento: ['', [Validators.required, Validators.maxLength(12)]],
+      clave_departamento: ['', [Validators.required, Validators.maxLength(5)]],
       departamento: ['', []],
-      clave_subdepartamento: ['', [Validators.required, Validators.maxLength(12)]],
+      clave_subdepartamento: ['', [Validators.required, Validators.maxLength(5)]],
       subdepartamento: ['', []],
 
-      sucursal: ['', [Validators.maxLength(12)]],
+      sucursal: ['', [Validators.maxLength(4)]],
       estacion: ['', [Validators.maxLength(10)]],
       ip: ['', [Validators.maxLength(15)]],
     });

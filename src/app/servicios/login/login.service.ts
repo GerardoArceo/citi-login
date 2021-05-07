@@ -17,33 +17,57 @@ export class LoginService {
     private sesion: ValidaSesionService
   ) { }
 
-  private postRequest(data, route): Observable<any> {
-    const url = environment.urlApi4 + route;
-    console.log('POST REQUEST', url, data);
-    return this.httpClient.post<HttpResponse<any>>(url, data);
+  private postRequest(data, route, origin = "five"): Observable<any> {
+    let url;
+    if (origin === 'five') {
+      url = environment.urlApiFive + route;
+    } else if (origin === 'arrenda') {
+      url = environment.urlApiArrenda + route;
+    } else if (origin === 'opera') {
+      url = environment.urlApiOpera + route;
+    }
+    const postData = {
+      user: 1,
+      role: 'maker',
+      data,
+      approved: true
+    };
+    console.log('POST REQUEST', url, postData, JSON.stringify(postData));
+    const request = this.httpClient.post<HttpResponse<any>>(url, postData);
+    request.subscribe(d => {
+      console.log(d);
+    });
+    return request;
   }
 
-  private getRequest(route): Observable<any> {
-    const url = environment.urlApi4 + route;
+  private getRequest(route, origin = "five"): Observable<any> {
+    let url;
+    if (origin === 'five') {
+      url = environment.urlApiFive + route;
+    } else if (origin === 'arrenda') { 
+      url = environment.urlApiArrenda + route;
+    } else if (origin === 'opera') {
+      url = environment.urlApiOpera + route;
+    }
     console.log('GET REQUEST', url);
     return this.httpClient.get<HttpResponse<any>>(url);
   }
 
-  getCatalogoAreas() {
-    return this.getRequest('catalogo/consulta/area');
+  getCatalogoAreas(origin = "five") {
+    return this.getRequest('catalogo/consulta/area', origin);
   }
-  getCatalogoDepartamentos() {
-    return this.getRequest('catalogo/consulta/departamentos');
+  getCatalogoDepartamentos(origin = "five") {
+    return this.getRequest('catalogo/consulta/departamentos', origin);
   }
-  getCatalogoSubdepartamentos() {
-    return this.getRequest('catalogo/consulta/subdepto');
-  }
-
-  consultaByNominaOrSoeid(data) {
-    return this.postRequest(data, 'empleados/valusr');
+  getCatalogoSubdepartamentos(origin = "five") {
+    return this.getRequest('catalogo/consulta/subdepto', origin);
   }
 
-  registrarEmpleado(form) {
+  consultaByNominaOrSoeid(data, origin = 'five') {
+    return this.postRequest(data, 'empleados/valusr', origin);
+  }
+
+  registrarEmpleado(form, origin = "five") {
     const data = {
       "NEMPLEADO_ID": form.nomina,
       "NCLAVE_AREA": form.clave_area,
@@ -59,7 +83,7 @@ export class LoginService {
       "NNUMERO": form.telefono,
       "USR_SSO": "1",
     }
-    return this.postRequest(data, 'empleados/alta');
+    return this.postRequest(data, 'empleados/alta', origin);
   }
 
 }

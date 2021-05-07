@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'src/app/servicios/dialog/dialog.service';
@@ -45,38 +46,42 @@ export class HomeComponent {
     ) {
     this.activatedRoute.queryParams.subscribe(params => {
         this.SOEID = params['soeid'] || '123';
-        const data = {
-          SOEID: this.SOEID,
-          IS_NOMINA: false
-        };
-        Loading.show();
-        this.loginService.consultaByNominaOrSoeid(data).subscribe(arg => {
-          Loading.hide();
-          if (arg.status == 'success') {
-            this.userValidate = true;
-          } else {
-            this.snackBarService.alertaError('El usuario no existe, se solicitará nómina');
-          }
-        }, err => {
-          this.snackBarService.alertaError('Hubo un error con el servicio');
-          Loading.hide();
-        });
     });
-    // this.sesion.validaSesion();
   }
 
-  open(option) {
+  open(origin) {
+    const data = {
+      SOEID: this.SOEID,
+      IS_NOMINA: false
+    };
+    Loading.show();
+    this.loginService.consultaByNominaOrSoeid(data, origin).subscribe(arg => {
+      Loading.hide();
+      if (arg.status == 'success') {
+        this.snackBarService.alertaSuccess('El usuario existe');
+        this.userValidate = true;
+        window.location.href = 'http://localhost:4200/' + origin;
+      } else {
+        this.snackBarService.alertaError('El usuario no existe, se solicitará nómina');
+        this.openRequestNomina(origin);
+      }
+    }, err => {
+      this.snackBarService.alertaError('Hubo un error con el servicio');
+      Loading.hide();
+    });
+  }
+
+  openRequestNomina(origin) {
     if (this.userValidate) {
-      window.location.href = 'http://localhost:4200/' + option;
+      window.location.href = 'http://localhost:4200/' + origin;
       return;
     }
-    this.dialogService.openLoginNomina({option, soeid: this.SOEID});
+    this.dialogService.openLoginNomina({origin, soeid: this.SOEID});
     this.dialogService.confirmLoginNomina().subscribe(result => {
       if (result) {
         console.log(result);
       }
     });
-    
   }
 
 }

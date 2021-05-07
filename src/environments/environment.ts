@@ -4,13 +4,10 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://localhost:4200/api/',
-  urlApiCat: 'http://localhost:4332/api2/',
-  urlApi2: 'http://localhost:8282/api2/',
-  urlApi22: 'http://localhost:8282/api/',
-  urlApi3: 'http://localhost:8383/api/',
-  urlApi4: 'http://localhost:8484/api/',
-  version: 'LOCAL_0.4.10'
+  urlApiFive: 'http://localhost:8484/api/',
+  urlApiArrenda: 'http://localhost:1111/api/',
+  urlApiOpera: 'http://localhost:2222/api/',
+  version: 'LOCAL_0.4.25'
 };
 
 /*
